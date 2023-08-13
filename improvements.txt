@@ -1,0 +1,9 @@
+# numerics
+- allow input y = mx+b equation
+- allow input sampling distribution
+
+# categoricals
+- allow input probabilities
+
+# all
+- allow input joint probabilities? Probably going too far...

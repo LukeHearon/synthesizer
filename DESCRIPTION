@@ -1,0 +1,12 @@
+Package: generator
+Type: Package
+Title: A suit of tools to generate datasets from specified regression terms or causal networks
+Version: 0.0.1
+Author: Luke Hearon
+Maintainer: <luke.e.hearon@gmail.com>
+Description: To be updated later!
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: dplyr, dagitty, stringr
