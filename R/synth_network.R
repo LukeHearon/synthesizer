@@ -1,9 +1,12 @@
-generate_from_network <- function(edges, observations = NULL, n_obs = 100){
+synth_network <- function(edges, sourceVals = NULL, n_obs = 100){
+  if(class(edges) != "data.frame"){edges <- translate_edges(edges)}
+  
+  # if there are no path coefficients, create them
   if(is.null(edges$coefficient)){edges$coefficient <- rnorm(n = nrow(edges))}
 
   # Map degrees
   #
-  ancestors <- edges[!(edges$from %in% edges$to),"from"] %>%
+  source_nodes <- edges[!(edges$from %in% edges$to),"from"] %>%
     unlist() %>%
     unique()
 
@@ -12,12 +15,12 @@ generate_from_network <- function(edges, observations = NULL, n_obs = 100){
   degrees <- rep(0, length(variables))
   names(degrees) <- variables
 
-  degrees[names(degrees) %in% ancestors] <- 0
+  degrees[names(degrees) %in% source_nodes] <- 0
 
   # loop control
   mapped <- F
   degree <- 1 # I really don't like having "degrees" and "degree"
-  last_solved <- ancestors
+  last_solved <- source_nodes
 
   # mapping loop
   while(mapped == F){
@@ -38,15 +41,15 @@ generate_from_network <- function(edges, observations = NULL, n_obs = 100){
 
   # Solve values
   #
-  if(is.null(observations)){observations = data.frame(sapply(ancestors, FUN = function(a){rnorm(n = n_obs)}))}
+  if(is.null(sourceVals)){sourceVals = data.frame(sapply(source_nodes, FUN = function(a){rnorm(n = n_obs)}))}
 
   solved_network <- apply(
-    observations,
+    sourceVals,
     1,
     function(obs_in){
       # start values, automate later
       values <- degrees # hacky
-      values[names(observations)] <- obs_in
+      values[names(sourceVals)] <- obs_in
 
       for(iteration in 1:max(degrees)){
         solutions <- sapply(

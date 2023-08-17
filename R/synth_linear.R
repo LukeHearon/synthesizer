@@ -1,6 +1,5 @@
-generate_dataset <- function(effects_in, n_obs = 100, noise = 1){
+synth_linear <- function(effects_in, n_obs = 100, noise = 1){
   # should I impute missing levels? E.g., if I only see "TRUE" should I just impute FALSE = 0?
-
 
   # From the input effects, interpret the desired factors and their levels
   factors_in <- sapply( # pull the terms from each effect
@@ -37,7 +36,7 @@ generate_dataset <- function(effects_in, n_obs = 100, noise = 1){
   # check effects
   if(!is.numeric(effects)){stop("problem in effects; check that you have filled all values")}
 
-  # generate an artificial dataset
+  # synthesizer an artificial dataset
   data <- lapply(
     factors_in,
     function(f){

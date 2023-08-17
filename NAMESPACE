@@ -1,2 +1,4 @@
 import(dplyr)
+import(dagitty)
+import(stringr)
 exportPattern("^[[:alpha:]]+")

@@ -1,4 +1,4 @@
-Package: generator
+Package: synthesizer
 Type: Package
 Title: A suit of tools to generate datasets from specified regression terms or causal networks
 Version: 0.0.1
