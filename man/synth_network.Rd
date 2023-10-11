@@ -12,10 +12,14 @@ set_network(edges, observations = NULL, n_obs = 100)
 
 \arguments{
   \item{edges}{
-    An object specifying the edges of your DAG. This can either be:
+    An object specifying the edges of your DAG. This can be:
   
     \itemize{
-      \item{}{a character object where each line is a single edge in the format "A -> B"}
+      \item{
+        a data frame with at least the following two columns: "from" holding the name of the causal node and "to" holding the name of the affected node
+        optionally, a "coefficient" column can hold a numeric that specifies the strength of the path (e.g.,  coefficient of 2 means the affected node will inherit twice the value of the causal node)
+      }
+      \item{a character object where each line is a single edge in the format "A -> B"}
       \item{a dagitty object built by the package dagitty}
     }
   }
@@ -23,5 +27,7 @@ set_network(edges, observations = NULL, n_obs = 100)
 
 
 \examples{
-hello()
+  synth_network(
+    edges = "A -> B"
+  )
 }
