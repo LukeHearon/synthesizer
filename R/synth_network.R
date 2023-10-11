@@ -1,8 +1,9 @@
-synth_network <- function(edges, sourceVals = NULL, n_obs = 100){
+synth_network <- function(edges, sourceVals = NULL, n_obs = 100, noise = 0.1){
   if(class(edges) != "data.frame"){edges <- translate_edges(edges)}
   
   # if there are no path coefficients, create them
   if(is.null(edges$coefficient)){edges$coefficient <- rnorm(n = nrow(edges))}
+  if(is.null(edges$sd)){edges$sd <- noise}
 
   map <- synthesizer::map_network(edges)
   nodes <- names(map)
@@ -31,12 +32,17 @@ synth_network <- function(edges, sourceVals = NULL, n_obs = 100){
           function(v){
             causes <- edges[edges$to == v,]
 
-            causes$value <- values[match(x = causes$from, table = names(values))] %>%
+            causes$source_value <- values[match(x = causes$from, table = names(values))] %>%
               unlist()
 
-            causes$contribution <- causes$value * causes$coefficient
+            causes$effect <- rnorm(
+              n = nrow(causes),
+              mean = causes$coefficient,
+              sd = causes$sd
+            ) %>% 
+              {.* causes$source_value}
 
-            return(sum(causes$contribution))
+            return(sum(causes$effect))
           }
         )
 
