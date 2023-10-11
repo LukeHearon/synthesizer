@@ -1,5 +1,5 @@
 synth_network <- function(edges, sourceVals = NULL, n_obs = 100, noise = 0.1){
-  if(!(class(edges) %in% "data.frame")){edges <- translate_edges(edges)}
+  if(!("data.frame" %in% class(edges))){edges <- translate_edges(edges)}
   
   # if there are no path coefficients, create them
   if(is.null(edges$coefficient)){edges$coefficient <- rnorm(n = nrow(edges))}
