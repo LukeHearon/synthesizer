@@ -11,7 +11,14 @@ set_network(edges, observations = NULL, n_obs = 100)
 }
 
 \arguments{
-  \edges{data.frame}{}
+  \item{edges}{
+    An object specifying the edges of your DAG. This can either be:
+  
+    \itemize{
+      \item{}{a character object where each line is a single edge in the format "A -> B"}
+      \item{a dagitty object built by the package dagitty}
+    }
+  }
 }
 
 
