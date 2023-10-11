@@ -9,4 +9,5 @@ Description: To be updated later!
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr, dagitty, stringr
+Imports: dagitty, stringr, dplyr, magrittr
+importFrom(magrittr,"%>%")
