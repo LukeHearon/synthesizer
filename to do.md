@@ -16,7 +16,9 @@
 # Documentation
 - Make it...
 
-# Other
+# Whole-package
+## Efficiency
+- Remove dependence on dplyr
 ## Internals
 - Create custom classes for synthesizer objects
 networks
