@@ -1,14 +1,21 @@
 # Functions
+# translate_edges
+### QOL
+- Allow arrows in any direction (`A -> B` or `B <- A`)
+- Allow chaining edges (`A -> B -> C`, `Y <- X -> Z`)
+- Allow no whitespace on path symbol (`A -> B` or `A->B`)
+
 ## synth_network
+### QOL
+- Allow user to specify means of source nodes by having NULL in to column of edges
+
 ### Computational
-- Find a more optimal computational method (matrices?)
+- Calculate variance covariance matrix and use MASS::mvrnorm for sampling?
+- 
 ### Functional
 - Allow categorical variables
-- Allow specification of noise along path
 - Simulate intervention on variables
 - Allow custom functions along any edge
-- Incorporate noise
-- Option to standardize nodes after synthesis (values snowball as path length increases)
 
 ### Best practicals 
 - Find a better name for "sourceVals"
@@ -19,7 +26,8 @@
 # Whole-package
 ## Efficiency
 - Remove dependence on dplyr
+
 ## Internals
 - Create custom classes for synthesizer objects
 networks
-- Incorporate error stesting
+- Incorporate error testing
